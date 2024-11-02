@@ -1,6 +1,11 @@
-import { Text, View, StatusBar } from 'react-native'
+import { Text, View, StatusBar, Pressable } from 'react-native'
+import { router } from 'expo-router'
 
 export default function Index() {
+  const onPlayPress = () => {
+    router.push('/game')
+  }
+
   return (
     <>
       <StatusBar backgroundColor="#131f24" />
@@ -12,7 +17,19 @@ export default function Index() {
           backgroundColor: '#131f24'
         }}
       >
-        <Text style={{ color: 'white', fontSize: 38 }}>Test</Text>
+        <Pressable
+          onPress={onPlayPress}
+          style={{
+            borderRadius: 64,
+            width: 128,
+            height: 128,
+            backgroundColor: '#58cc02',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Text style={{ color: 'white', fontWeight: '900' }}>Play</Text>
+        </Pressable>
       </View>
     </>
   )
