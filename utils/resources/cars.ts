@@ -226,6 +226,132 @@ const ferrari = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Ferrari_Portofino_M_IMG_4351.jpg/800px-Ferrari_Portofino_M_IMG_4351.jpg',
       'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Ferrari_Portofino%2C_Paris_Motor_Show_2018%2C_IMG_0641.jpg/800px-Ferrari_Portofino%2C_Paris_Motor_Show_2018%2C_IMG_0641.jpg'
     ]
+  },
+  {
+    make: 'Ferrari',
+    model: 'GTC4Lusso',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ferrari_GTC4Lusso_IMG_4353.jpg/800px-Ferrari_GTC4Lusso_IMG_4353.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Ferrari_GTC4Lusso_IMG_4354.jpg/800px-Ferrari_GTC4Lusso_IMG_4354.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: 'California',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Ferrari_California_30.jpg/800px-Ferrari_California_30.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/2013_California_30_HS.jpg/800px-2013_California_30_HS.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Ferrari_California_-_Flickr_-_Alexandre_Pr%C3%A9vot_%2813%29_%28cropped%29.jpg/800px-Ferrari_California_-_Flickr_-_Alexandre_Pr%C3%A9vot_%2813%29_%28cropped%29.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: 'California T',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Ferrari_California_T_-_Mondial_de_l%27Automobile_de_Paris_2014_-_003.jpg/800px-Ferrari_California_T_-_Mondial_de_l%27Automobile_de_Paris_2014_-_003.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/2014-03-04_Geneva_Motor_Show_1452_%28cropped%29.JPG/800px-2014-03-04_Geneva_Motor_Show_1452_%28cropped%29.JPG'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: 'FF',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/2013_Ferrari_FF%2C_Blu_TdF%2C_front_left.jpg/800px-2013_Ferrari_FF%2C_Blu_TdF%2C_front_left.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/2013_Ferrari_FF%2C_Blu_TdF%2C_rear_left.jpg/800px-2013_Ferrari_FF%2C_Blu_TdF%2C_rear_left.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: '612',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Ferrari_612_Scaglietti_-_Flickr_-_Alexandre_Pr%C3%A9vot_%2816%29_%28cropped%29.jpg/800px-Ferrari_612_Scaglietti_-_Flickr_-_Alexandre_Pr%C3%A9vot_%2816%29_%28cropped%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Ferrari_612_Scaglietti_-_Flickr_-_Alexandre_Pr%C3%A9vot_%2815%29_%28cropped%29.jpg/800px-Ferrari_612_Scaglietti_-_Flickr_-_Alexandre_Pr%C3%A9vot_%2815%29_%28cropped%29.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: '456',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Fastlane_2012_%287188592168%29_%28cropped%29.jpg/800px-Fastlane_2012_%287188592168%29_%28cropped%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Festival_automobile_international_2011_-_Vente_aux_ench%C3%A8res_-_Ferrari_456_M_GT_-_1994_06.jpg/800px-Festival_automobile_international_2011_-_Vente_aux_ench%C3%A8res_-_Ferrari_456_M_GT_-_1994_06.jpg',
+      'https://sbraceengineering.co.uk/wp-content/uploads/Ferrari-456-GT-1.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: '456M',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Paris_-_RM_Sotheby%E2%80%99s_2016_-_Ferrari_456M_GTA_-_1999_-_006.jpg/800px-Paris_-_RM_Sotheby%E2%80%99s_2016_-_Ferrari_456M_GTA_-_1999_-_006.jpg',
+      'https://hips.hearstapps.com/hmg-prod/images/2002-ferrari-456m-gt-2002-ferrari-456m-gt-2c1f051b-37fa-4a16-bd12-f7806b5d0fab-emqlni-99125-99126-scaled-1670535871.jpg?crop=0.888671875xw:1xh;center,top&resize=1200:*'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: '412',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/1988_Ferrari_412_front.jpg/800px-1988_Ferrari_412_front.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/1988_Ferrari_412_rear.jpg/800px-1988_Ferrari_412_rear.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: '365',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/1973_Ferrari_365_GT4_2%2B2%2C_front_left_-_Azzurro.jpg/800px-1973_Ferrari_365_GT4_2%2B2%2C_front_left_-_Azzurro.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Ferrari_365_GT4_2%2B2_rear_right.jpg/800px-Ferrari_365_GT4_2%2B2_rear_right.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: '400',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Ferrari_400_automatic.JPG/800px-Ferrari_400_automatic.JPG',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Paris_-_Bonhams_2014_-_Ferrari_400GT_Automatic_Sports_Saloon_-_1978_-_001.jpg/800px-Paris_-_Bonhams_2014_-_Ferrari_400GT_Automatic_Sports_Saloon_-_1978_-_001.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/1983_Ferrari_400i_5-spd.jpg/800px-1983_Ferrari_400i_5-spd.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: '812 Superfast',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/2019_Ferrari_812_Superfast_S-A_6.5.jpg/800px-2019_Ferrari_812_Superfast_S-A_6.5.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Ferrari_812_Superfast_%2850719522331%29_%28cropped%29.jpg/800px-Ferrari_812_Superfast_%2850719522331%29_%28cropped%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ferrari_812_Superfast%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS1324%29.jpg/800px-Ferrari_812_Superfast%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS1324%29.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: 'F12berlinetta',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Ferrari_F12berlinetta_IMG_2941.jpg/800px-Ferrari_F12berlinetta_IMG_2941.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Ferrari_F12_Berlinetta_%2826912701327%29.jpg/799px-Ferrari_F12_Berlinetta_%2826912701327%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Ferrari_F12berlinetta_%28Scottsdale%2C_Arizona%29.jpg/800px-Ferrari_F12berlinetta_%28Scottsdale%2C_Arizona%29.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: '599',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Ferrari599_A6_1.JPG/800px-Ferrari599_A6_1.JPG',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Ferrari_599_GTB_Fiorano_-_Flickr_-_Alexandre_Pr%C3%A9vot_%2830%29.jpg/800px-Ferrari_599_GTB_Fiorano_-_Flickr_-_Alexandre_Pr%C3%A9vot_%2830%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Ferrari_599_Superamerica_45_rear.jpg/800px-Ferrari_599_Superamerica_45_rear.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: '575M',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Ferrari575M.jpg/800px-Ferrari575M.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ferrari_575M_Maranello_-_Flickr_-_Alexandre_Pr%C3%A9vot_%284%29_%28cropped%29.jpg/799px-Ferrari_575M_Maranello_-_Flickr_-_Alexandre_Pr%C3%A9vot_%284%29_%28cropped%29.jpg'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: '550',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Paris_-_Bonhams_2016_-_Ferrari_550_Maranello_coup%C3%A9_-_1999_-_005.jpg/800px-Paris_-_Bonhams_2016_-_Ferrari_550_Maranello_coup%C3%A9_-_1999_-_005.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Paris_-_Bonhams_2016_-_Ferrari_550_Maranello_coup%C3%A9_-_2001_-_003.jpg/800px-Paris_-_Bonhams_2016_-_Ferrari_550_Maranello_coup%C3%A9_-_2001_-_003.jpg'
+    ]
   }
 ]
 
