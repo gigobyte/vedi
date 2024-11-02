@@ -11,6 +11,7 @@ export function Button(
     style?: StyleProp<TextStyle>
     textStyle?: StyleProp<TextStyle>
     borderWidth?: number
+    borderRadius?: number
   }
 ) {
   const [showElevation, setShowElevation] = useState(true)
@@ -22,6 +23,7 @@ export function Button(
   }[props.variant]
 
   const borderWidth = props.borderWidth ?? 2
+  const borderRadius = props.borderRadius ?? 12
 
   return (
     <Pressable
@@ -34,9 +36,9 @@ export function Button(
           style={{
             position: 'absolute',
             width: '100%',
-            height: 30,
             backgroundColor: accentColorDarker,
-            borderRadius: 12,
+            borderRadius,
+            top: 0,
             bottom: 0
           }}
         />
@@ -44,9 +46,11 @@ export function Button(
       <View
         style={[
           {
+            alignItems: 'center',
+            justifyContent: 'center',
             borderWidth,
             borderColor: accentColor,
-            borderRadius: 12,
+            borderRadius,
             backgroundColor: props.filled ? accentColor : '#131f24',
             marginTop: showElevation ? 0 : borderWidth,
             marginBottom: showElevation ? borderWidth : 0

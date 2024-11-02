@@ -1,5 +1,6 @@
-import { Text, View, StatusBar, Pressable } from 'react-native'
+import { Text, View } from 'react-native'
 import { router } from 'expo-router'
+import { Button } from '../components/Button'
 
 export default function Index() {
   const onPlayPress = () => {
@@ -16,33 +17,19 @@ export default function Index() {
       }}
     >
       <View>
-        <View
-          style={{
-            position: 'absolute',
-            bottom: -8,
-            borderRadius: 64,
-            width: 128,
-            height: 96,
-            backgroundColor: '#659b2b',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        />
-        <Pressable
+        <Button
+          variant="success"
+          filled
           onPress={onPlayPress}
+          borderRadius={64}
           style={{
-            borderRadius: 64,
             width: 128,
-            height: 96,
-            backgroundColor: '#79b933',
-            justifyContent: 'center',
-            alignItems: 'center'
+            height: 96
           }}
-        >
-          <Text style={{ color: 'white', fontWeight: '900', fontSize: 24 }}>
-            Play
-          </Text>
-        </Pressable>
+          borderWidth={4}
+          text="Play"
+          textStyle={{ fontWeight: '900', fontSize: 24 }}
+        />
       </View>
     </View>
   )
