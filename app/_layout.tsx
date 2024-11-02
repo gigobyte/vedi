@@ -22,7 +22,7 @@ export default function Layout() {
         name="game"
         options={{
           headerShown: false,
-          presentation: 'modal',
+          presentation: 'transparentModal',
           animation: 'slide_from_bottom'
         }}
       />

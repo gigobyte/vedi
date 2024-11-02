@@ -21,10 +21,10 @@ export default function Index() {
           <View
             style={{
               position: 'absolute',
-              bottom: -5,
+              bottom: -8,
               borderRadius: 64,
               width: 128,
-              height: 128,
+              height: 96,
               backgroundColor: '#659b2b',
               justifyContent: 'center',
               alignItems: 'center'
@@ -35,13 +35,15 @@ export default function Index() {
             style={{
               borderRadius: 64,
               width: 128,
-              height: 128,
+              height: 96,
               backgroundColor: '#79b933',
               justifyContent: 'center',
               alignItems: 'center'
             }}
           >
-            <Text style={{ color: 'white', fontWeight: '900' }}>Play</Text>
+            <Text style={{ color: 'white', fontWeight: '900', fontSize: 24 }}>
+              Play
+            </Text>
           </Pressable>
         </View>
       </View>
