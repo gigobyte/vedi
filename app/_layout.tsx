@@ -1,8 +1,13 @@
 import { Stack } from 'expo-router'
-import { useFonts, Nunito_700Bold } from '@expo-google-fonts/nunito'
+import {
+  useFonts,
+  Nunito_700Bold,
+  Nunito_500Medium
+} from '@expo-google-fonts/nunito'
 
 export default function Layout() {
   let [fontsLoaded] = useFonts({
+    Nunito_500Medium,
     Nunito_700Bold
   })
 
