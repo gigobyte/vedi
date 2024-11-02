@@ -8,58 +8,46 @@ import {
   Pressable
 } from 'react-native'
 import Animated, {
+  Easing,
+  SlideInDown,
+  SlideInUp,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
   withTiming
 } from 'react-native-reanimated'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { getRandomElement } from '../utils/array'
 import { useEffect, useState } from 'react'
 import { questions } from '../utils/questions'
+import { Button, ButtonVariant } from '../components/Button'
 
 function Answer(props: {
   value: string
   index: number
-  type: 'correct' | 'wrong' | 'neutral'
+  variant: ButtonVariant
   onPress: (index: number) => void
 }) {
   const onPress = () => {
     props.onPress(props.index)
   }
 
-  const [selectedColor, selectedColorDark] = {
-    correct: ['#79b933', '#659b2b'],
-    wrong: ['#ee5555', '#be4444'],
-    neutral: [undefined, undefined]
-  }[props.type]
-
   return (
-    <Pressable
+    <Button
       style={{
-        padding: 10,
-        borderWidth: 2,
-        borderBottomWidth: 4,
-        borderTopColor: selectedColor ?? '#37464f',
-        borderLeftColor: selectedColor ?? '#37464f',
-        borderRightColor: selectedColor ?? '#37464f',
-        borderBottomColor: selectedColorDark ?? '#37464f',
-        borderRadius: 12
+        padding: 10
       }}
+      borderWidth={2}
+      variant={props.variant}
       onPress={onPress}
-    >
-      <Text
-        style={{
-          color: selectedColor ?? 'white',
-          fontSize: 20,
-          fontWeight: 600,
-          fontFamily: 'Nunito_700Bold'
-        }}
-      >
-        {props.value}
-      </Text>
-    </Pressable>
+      textStyle={{
+        fontSize: 20,
+        fontWeight: 600,
+        fontFamily: 'Nunito_700Bold'
+      }}
+      text={props.value}
+    />
   )
 }
 
@@ -118,6 +106,7 @@ function ProgressBar(props: { progress: number }) {
 }
 
 export default function Game() {
+  const insets = useSafeAreaInsets()
   const dimensions = useWindowDimensions()
   const [lifes, setLifes] = useState(5)
   const [questionIndex, setQuestionIndex] = useState(1)
@@ -166,7 +155,8 @@ export default function Game() {
       style={{
         flex: 1,
         backgroundColor: '#131f24',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: insets.top
       }}
     >
       <View
@@ -235,19 +225,20 @@ export default function Game() {
             value={answer}
             index={i}
             onPress={onAnswerPress}
-            type={
+            variant={
               selectedAnswer === i
                 ? i === question.correctAnswer
-                  ? 'correct'
-                  : 'wrong'
-                : 'neutral'
+                  ? 'success'
+                  : 'error'
+                : 'default'
             }
           />
         ))}
       </View>
 
       {selectedAnswer !== null ? (
-        <View
+        <Animated.View
+          entering={SlideInDown.duration(200).easing(Easing.out(Easing.quad))}
           style={{
             paddingVertical: 20,
             paddingHorizontal: 20,
@@ -303,34 +294,24 @@ export default function Game() {
               </Text>
             </View>
           ) : null}
-          <Pressable
+          <Button
+            filled
+            variant={isCorrectAnswer ? 'success' : 'error'}
             style={{
-              padding: 15,
-              borderWidth: 2,
-              borderBottomWidth: 4,
-              borderTopColor: isCorrectAnswer ? '#93d333' : '#ee5555',
-              borderLeftColor: isCorrectAnswer ? '#93d333' : '#ee5555',
-              borderRightColor: isCorrectAnswer ? '#93d333' : '#ee5555',
-              borderBottomColor: isCorrectAnswer ? '#93d333' : '#d84848',
-              backgroundColor: isCorrectAnswer ? '#93d333' : '#ee5555',
-              borderRadius: 12,
+              padding: 12,
               alignItems: 'center'
             }}
+            borderWidth={4}
             onPress={onContinuePress}
-          >
-            <Text
-              style={{
-                color: '#131f24',
-                fontSize: 16,
-                textTransform: 'uppercase',
-                fontWeight: 900,
-                fontFamily: 'Nunito_700Bold'
-              }}
-            >
-              {isCorrectAnswer ? 'Continue' : 'Got it'}
-            </Text>
-          </Pressable>
-        </View>
+            text={isCorrectAnswer ? 'Continue' : 'Got it'}
+            textStyle={{
+              fontSize: 16,
+              textTransform: 'uppercase',
+              fontWeight: 900,
+              fontFamily: 'Nunito_700Bold'
+            }}
+          />
+        </Animated.View>
       ) : null}
     </View>
   )
