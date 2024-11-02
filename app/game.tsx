@@ -19,7 +19,7 @@ import Animated, {
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { getRandomElement } from '../utils/array'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { questions } from '../utils/questions'
 import { Button, ButtonVariant } from '../components/Button'
 
@@ -109,17 +109,16 @@ export default function Game() {
   const insets = useSafeAreaInsets()
   const dimensions = useWindowDimensions()
   const [lifes, setLifes] = useState(5)
-  const [questionIndex, setQuestionIndex] = useState(1)
-  const [questionGenerator] = useState(() => getRandomElement(questions)())
-  const [question, setQuestion] = useState(() => {
-    const result = questionGenerator.next()
+  const [questionIndex, setQuestionIndex] = useState(0)
+  const qs = useMemo(
+    () =>
+      Array(6)
+        .fill(null)
+        .map(() => getRandomElement(questions)()),
+    []
+  )
+  const question = qs[questionIndex]
 
-    if (!result.done) {
-      return result.value
-    }
-
-    throw 'Ran out of questions'
-  })
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
 
   const imageWidth = dimensions.width - 40
@@ -134,17 +133,12 @@ export default function Game() {
   }
 
   const onContinuePress = () => {
-    if (questionIndex === MaxNumberOfQuestions || lifes === 0) {
+    if (questionIndex + 1 === MaxNumberOfQuestions || lifes === 0) {
       router.back()
       return
     }
 
     setSelectedAnswer(null)
-    const generatorResult = questionGenerator.next()
-    if (generatorResult.done) {
-      router.back()
-    }
-    setQuestion(generatorResult.value)
     setQuestionIndex((v) => v + 1)
   }
 
@@ -173,7 +167,7 @@ export default function Game() {
           <Ionicons name="close" size={48} color="#37464f" />
         </Link>
         <View style={{ flex: 1, marginLeft: -10 }}>
-          <ProgressBar progress={questionIndex} />
+          <ProgressBar progress={questionIndex + 1} />
         </View>
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>

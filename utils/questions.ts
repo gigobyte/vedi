@@ -8,20 +8,14 @@ export type Question = {
   correctAnswer: number
 }
 
-function* generateQuestion<T extends { images: string[] }>(config: {
+function questionGenerator<T extends { images: string[] }>(config: {
   resources: T[]
   getAnswerLabel: (resource: T) => string
   getTitle: (resource: T) => string
   canBeWrongAnswer: (currentAnswer: T, resource: T) => boolean
 }) {
-  const resources = shuffle([...config.resources])
-
-  while (resources.length > 0) {
-    const resource = resources.pop()
-
-    if (!resource) {
-      return
-    }
+  return () => {
+    const resource = shuffle([...config.resources]).pop()!
 
     const label = config.getAnswerLabel(resource)
 
@@ -40,17 +34,15 @@ function* generateQuestion<T extends { images: string[] }>(config: {
       correctAnswer: answers.findIndex((answer) => answer === label)
     }
 
-    yield question
+    return question
   }
 }
 
-function whichModelQuestion(): Generator<Question> {
-  return generateQuestion({
-    resources: cars,
-    getTitle: (car) => `Which ${car.make} model is that?`,
-    getAnswerLabel: (car) => car.model,
-    canBeWrongAnswer: (altCar, correctCar) => altCar.make === correctCar.make
-  })
-}
+const whichModelQuestion = questionGenerator({
+  resources: cars,
+  getTitle: (car) => `Which ${car.make} model is that?`,
+  getAnswerLabel: (car) => car.model,
+  canBeWrongAnswer: (altCar, correctCar) => altCar.make === correctCar.make
+})
 
-export const questions: Array<() => Generator<Question>> = [whichModelQuestion]
+export const questions: Array<() => Question> = [whichModelQuestion]

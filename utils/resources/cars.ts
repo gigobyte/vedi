@@ -106,6 +106,23 @@ const ferrari = [
     images: [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Ferrari_Monza_SP2%2C_Paris_Motor_Show_2018%2C_IMG_0638.jpg/800px-Ferrari_Monza_SP2%2C_Paris_Motor_Show_2018%2C_IMG_0638.jpg'
     ]
+  },
+  {
+    make: 'Ferrari',
+    model: 'Mondial 8',
+    images: [
+      'https://jbclassiccars.com/wp-content/uploads/2019/05/JB-Classic-Cars-Ferrari-Mondial-8-7.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/8/89/Ferrari_Mondial_8_RB.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Ferrari_Mondial_8_in_Vlaams-Brabant.JPG/800px-Ferrari_Mondial_8_in_Vlaams-Brabant.JPG'
+    ]
+  },
+  {
+    make: 'Ferrari',
+    model: 'Mondial T',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Ferrari_Mondial_at_Schaffen-Diest_2018.jpg/800px-Ferrari_Mondial_at_Schaffen-Diest_2018.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/4/4d/Mondial_t_1.jpg'
+    ]
   }
 ]
 
