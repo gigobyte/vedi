@@ -162,181 +162,176 @@ export default function Game() {
   const isCorrectAnswer = selectedAnswer === question.correctAnswer
 
   return (
-    <>
-      <StatusBar backgroundColor="#131f24" />
-      <SafeAreaView style={{ flex: 1 }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#131f24',
+        alignItems: 'center'
+      }}
+    >
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 20,
+          paddingTop: 20,
+          paddingHorizontal: 20,
+          paddingBottom: 50
+        }}
+      >
+        <Link href="../">
+          <Ionicons name="close" size={48} color="#37464f" />
+        </Link>
+        <View style={{ flex: 1, marginLeft: -10 }}>
+          <ProgressBar progress={questionIndex} />
+        </View>
+
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Ionicons name="heart" size={32} color="#ff4b4b" />
+          <Text
+            style={{
+              paddingLeft: 5,
+              fontSize: 18,
+              fontFamily: 'Nunito_700Bold',
+              color: '#ff4b4b'
+            }}
+          >
+            {lifes}
+          </Text>
+        </View>
+      </View>
+      {question.image ? (
+        <Image
+          style={{ width: imageWidth, height: 220, borderRadius: 4 }}
+          source={{ uri: question.image }}
+        />
+      ) : null}
+
+      <Text
+        style={{
+          fontSize: 24,
+          fontWeight: 900,
+          fontFamily: 'Nunito_700Bold',
+          color: 'white',
+          paddingTop: 15,
+          paddingBottom: 40
+        }}
+      >
+        {question.title}
+      </Text>
+      <View
+        style={{
+          flex: 1,
+          paddingHorizontal: 40,
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: 10
+        }}
+      >
+        {question.answers.map((answer, i) => (
+          <Answer
+            key={answer}
+            value={answer}
+            index={i}
+            onPress={onAnswerPress}
+            type={
+              selectedAnswer === i
+                ? i === question.correctAnswer
+                  ? 'correct'
+                  : 'wrong'
+                : 'neutral'
+            }
+          />
+        ))}
+      </View>
+
+      {selectedAnswer !== null ? (
         <View
           style={{
-            flex: 1,
-            backgroundColor: '#131f24',
-            alignItems: 'center'
+            paddingVertical: 20,
+            paddingHorizontal: 20,
+            alignSelf: 'stretch',
+            backgroundColor: '#202f36'
           }}
         >
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              gap: 20,
-              paddingTop: 20,
-              paddingHorizontal: 20,
-              paddingBottom: 50
+              paddingBottom: 20
             }}
           >
-            <Link href="../">
-              <Ionicons name="close" size={48} color="#37464f" />
-            </Link>
-            <View style={{ flex: 1, marginLeft: -10 }}>
-              <ProgressBar progress={questionIndex} />
-            </View>
-
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Ionicons name="heart" size={32} color="#ff4b4b" />
-              <Text
-                style={{
-                  paddingLeft: 5,
-                  fontSize: 18,
-                  fontFamily: 'Nunito_700Bold',
-                  color: '#ff4b4b'
-                }}
-              >
-                {lifes}
-              </Text>
-            </View>
-          </View>
-          {question.image ? (
-            <Image
-              style={{ width: imageWidth, height: 220, borderRadius: 4 }}
-              source={{ uri: question.image }}
+            <Ionicons
+              name={isCorrectAnswer ? 'checkmark-circle' : 'close-circle'}
+              size={32}
+              color={isCorrectAnswer ? '#79b933' : '#d84848'}
             />
-          ) : null}
-
-          <Text
-            style={{
-              fontSize: 24,
-              fontWeight: 900,
-              fontFamily: 'Nunito_700Bold',
-              color: 'white',
-              paddingTop: 15,
-              paddingBottom: 40
-            }}
-          >
-            {question.title}
-          </Text>
-          <View
-            style={{
-              flex: 1,
-              paddingHorizontal: 40,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: 10
-            }}
-          >
-            {question.answers.map((answer, i) => (
-              <Answer
-                key={answer}
-                value={answer}
-                index={i}
-                onPress={onAnswerPress}
-                type={
-                  selectedAnswer === i
-                    ? i === question.correctAnswer
-                      ? 'correct'
-                      : 'wrong'
-                    : 'neutral'
-                }
-              />
-            ))}
-          </View>
-
-          {selectedAnswer !== null ? (
-            <View
+            <Text
               style={{
-                paddingVertical: 20,
-                paddingHorizontal: 20,
-                alignSelf: 'stretch',
-                backgroundColor: '#202f36'
+                marginLeft: 10,
+                fontSize: 24,
+                color: isCorrectAnswer ? '#79b933' : '#d84848',
+                fontWeight: 900,
+                fontFamily: 'Nunito_700Bold'
               }}
             >
-              <View
+              {isCorrectAnswer ? 'Nicely done!' : 'Incorrect'}
+            </Text>
+          </View>
+          {!isCorrectAnswer ? (
+            <View style={{ paddingBottom: 20 }}>
+              <Text
                 style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  paddingBottom: 20
+                  fontSize: 18,
+                  fontWeight: 800,
+                  fontFamily: 'Nunito_700Bold',
+                  color: '#d84848',
+                  paddingBottom: 5
                 }}
               >
-                <Ionicons
-                  name={isCorrectAnswer ? 'checkmark-circle' : 'close-circle'}
-                  size={32}
-                  color={isCorrectAnswer ? '#79b933' : '#d84848'}
-                />
-                <Text
-                  style={{
-                    marginLeft: 10,
-                    fontSize: 24,
-                    color: isCorrectAnswer ? '#79b933' : '#d84848',
-                    fontWeight: 900,
-                    fontFamily: 'Nunito_700Bold'
-                  }}
-                >
-                  {isCorrectAnswer ? 'Nicely done!' : 'Incorrect'}
-                </Text>
-              </View>
-              {!isCorrectAnswer ? (
-                <View style={{ paddingBottom: 20 }}>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 800,
-                      fontFamily: 'Nunito_700Bold',
-                      color: '#d84848',
-                      paddingBottom: 5
-                    }}
-                  >
-                    Correct Answer:
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      fontFamily: 'Nunito_500Medium',
-                      color: '#d84848'
-                    }}
-                  >
-                    {question.answers[question.correctAnswer]}
-                  </Text>
-                </View>
-              ) : null}
-              <Pressable
+                Correct Answer:
+              </Text>
+              <Text
                 style={{
-                  padding: 15,
-                  borderWidth: 2,
-                  borderBottomWidth: 4,
-                  borderTopColor: isCorrectAnswer ? '#93d333' : '#ee5555',
-                  borderLeftColor: isCorrectAnswer ? '#93d333' : '#ee5555',
-                  borderRightColor: isCorrectAnswer ? '#93d333' : '#ee5555',
-                  borderBottomColor: isCorrectAnswer ? '#93d333' : '#d84848',
-                  backgroundColor: isCorrectAnswer ? '#93d333' : '#ee5555',
-                  borderRadius: 12,
-                  alignItems: 'center'
+                  fontSize: 18,
+                  fontFamily: 'Nunito_500Medium',
+                  color: '#d84848'
                 }}
-                onPress={onContinuePress}
               >
-                <Text
-                  style={{
-                    color: '#131f24',
-                    fontSize: 16,
-                    textTransform: 'uppercase',
-                    fontWeight: 900,
-                    fontFamily: 'Nunito_700Bold'
-                  }}
-                >
-                  {isCorrectAnswer ? 'Continue' : 'Got it'}
-                </Text>
-              </Pressable>
+                {question.answers[question.correctAnswer]}
+              </Text>
             </View>
           ) : null}
+          <Pressable
+            style={{
+              padding: 15,
+              borderWidth: 2,
+              borderBottomWidth: 4,
+              borderTopColor: isCorrectAnswer ? '#93d333' : '#ee5555',
+              borderLeftColor: isCorrectAnswer ? '#93d333' : '#ee5555',
+              borderRightColor: isCorrectAnswer ? '#93d333' : '#ee5555',
+              borderBottomColor: isCorrectAnswer ? '#93d333' : '#d84848',
+              backgroundColor: isCorrectAnswer ? '#93d333' : '#ee5555',
+              borderRadius: 12,
+              alignItems: 'center'
+            }}
+            onPress={onContinuePress}
+          >
+            <Text
+              style={{
+                color: '#131f24',
+                fontSize: 16,
+                textTransform: 'uppercase',
+                fontWeight: 900,
+                fontFamily: 'Nunito_700Bold'
+              }}
+            >
+              {isCorrectAnswer ? 'Continue' : 'Got it'}
+            </Text>
+          </Pressable>
         </View>
-      </SafeAreaView>
-    </>
+      ) : null}
+    </View>
   )
 }
