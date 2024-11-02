@@ -1,4 +1,4 @@
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import {
   StatusBar,
   View,
@@ -57,9 +57,38 @@ function Answer(props: {
   )
 }
 
+const MaxNumberOfQuestions = 6
+
+function ProgressBar(props: { progress: number }) {
+  const [width, setWidth] = useState(0)
+
+  const progressWidth = width * (props.progress / MaxNumberOfQuestions)
+
+  return (
+    <View
+      onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
+      style={{
+        height: 16,
+        borderRadius: 8,
+        backgroundColor: '#37464f'
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: '#93d333',
+          width: progressWidth,
+          height: 16,
+          borderRadius: 8
+        }}
+      ></View>
+    </View>
+  )
+}
+
 export default function Game() {
   const dimensions = useWindowDimensions()
   const [lifes, setLifes] = useState(5)
+  const [questionIndex, setQuestionIndex] = useState(1)
   const [questionGenerator] = useState(() => getRandomElement(questions)())
   const [question, setQuestion] = useState(() => {
     const result = questionGenerator.next()
@@ -84,12 +113,18 @@ export default function Game() {
   }
 
   const onContinuePress = () => {
+    if (questionIndex === MaxNumberOfQuestions || lifes === 0) {
+      router.back()
+      return
+    }
+
     setSelectedAnswer(null)
     const generatorResult = questionGenerator.next()
     if (generatorResult.done) {
-      return
+      router.back()
     }
     setQuestion(generatorResult.value)
+    setQuestionIndex((v) => v + 1)
   }
 
   const isCorrectAnswer = selectedAnswer === question.correctAnswer
@@ -118,15 +153,10 @@ export default function Game() {
             <Link href="../">
               <Ionicons name="close" size={48} color="#37464f" />
             </Link>
-            <View
-              style={{
-                flex: 1,
-                height: 16,
-                marginLeft: -10,
-                borderRadius: 8,
-                backgroundColor: '#37464f'
-              }}
-            ></View>
+            <View style={{ flex: 1, marginLeft: -10 }}>
+              <ProgressBar progress={questionIndex} />
+            </View>
+
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Ionicons name="heart" size={32} color="#ff4b4b" />
               <Text

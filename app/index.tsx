@@ -17,19 +17,33 @@ export default function Index() {
           backgroundColor: '#131f24'
         }}
       >
-        <Pressable
-          onPress={onPlayPress}
-          style={{
-            borderRadius: 64,
-            width: 128,
-            height: 128,
-            backgroundColor: '#58cc02',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <Text style={{ color: 'white', fontWeight: '900' }}>Play</Text>
-        </Pressable>
+        <View>
+          <View
+            style={{
+              position: 'absolute',
+              bottom: -5,
+              borderRadius: 64,
+              width: 128,
+              height: 128,
+              backgroundColor: '#659b2b',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          />
+          <Pressable
+            onPress={onPlayPress}
+            style={{
+              borderRadius: 64,
+              width: 128,
+              height: 128,
+              backgroundColor: '#79b933',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Text style={{ color: 'white', fontWeight: '900' }}>Play</Text>
+          </Pressable>
+        </View>
       </View>
     </>
   )

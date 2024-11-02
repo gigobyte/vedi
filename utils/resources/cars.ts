@@ -22,5 +22,23 @@ export const cars = [
     model: 'Daytona SP3',
     image:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Ferrari_Daytona_SP3_front_side_at_CF_2022.jpg/800px-Ferrari_Daytona_SP3_front_side_at_CF_2022.jpg'
+  },
+  {
+    make: 'Ferrari',
+    model: 'Purosangue',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/2023_Ferrari_Purosangue.jpg/800px-2023_Ferrari_Purosangue.jpg'
+  },
+  {
+    make: 'Ferrari',
+    model: '12Cilindri',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Ferrari_12Cilindri_at_Maranello.jpg/800px-Ferrari_12Cilindri_at_Maranello.jpg'
+  },
+  {
+    make: 'Ferrari',
+    model: 'F80',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Ferrari_F80.jpg/800px-Ferrari_F80.jpg'
   }
 ]

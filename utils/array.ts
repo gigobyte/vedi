@@ -13,14 +13,15 @@ export function shuffle<T>(array: T[]): T[] {
   return array
 }
 
-export function getOtherAnswers<T>(
+export function getWrongAnswers<T>(
   array: T[],
   predicate: (arg: T) => boolean
 ): T[] {
+  const copy = shuffle([...array])
   const result = []
-  for (let i = 0; i < array.length; i++) {
-    if (predicate(array[i])) {
-      result.push(array[i])
+  for (let i = 0; i < copy.length; i++) {
+    if (predicate(copy[i])) {
+      result.push(copy[i])
     }
     if (result.length === 3) {
       break
