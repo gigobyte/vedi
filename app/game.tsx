@@ -7,10 +7,16 @@ import {
   useWindowDimensions,
   Pressable
 } from 'react-native'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming
+} from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { getRandomElement } from '../utils/array'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { questions } from '../utils/questions'
 
 function Answer(props: {
@@ -61,8 +67,20 @@ const MaxNumberOfQuestions = 6
 
 function ProgressBar(props: { progress: number }) {
   const [width, setWidth] = useState(0)
+  const progressWidth = useSharedValue(0)
 
-  const progressWidth = width * (props.progress / MaxNumberOfQuestions)
+  useEffect(() => {
+    progressWidth.value = withSpring(
+      width * (props.progress / MaxNumberOfQuestions),
+      { duration: 500, dampingRatio: 0.6 }
+    )
+  }, [props.progress, width])
+
+  const shineStyle = useAnimatedStyle(() => {
+    return {
+      width: progressWidth.value - 14
+    }
+  })
 
   return (
     <View
@@ -73,14 +91,28 @@ function ProgressBar(props: { progress: number }) {
         backgroundColor: '#37464f'
       }}
     >
-      <View
+      <Animated.View
         style={{
           backgroundColor: '#93d333',
           width: progressWidth,
           height: 16,
           borderRadius: 8
         }}
-      ></View>
+      >
+        <Animated.View
+          style={[
+            shineStyle,
+            {
+              backgroundColor: '#a9dc5c',
+              height: 5,
+              top: 3,
+              left: 7,
+              borderRadius: 2,
+              position: 'absolute'
+            }
+          ]}
+        />
+      </Animated.View>
     </View>
   )
 }
