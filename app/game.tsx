@@ -75,7 +75,7 @@ export default function Game() {
   const imageWidth = dimensions.width - 40
 
   const onAnswerPress = (answerIndex: number) => {
-    if (!selectedAnswer) {
+    if (selectedAnswer === null) {
       setSelectedAnswer(answerIndex)
       if (answerIndex !== question.correctAnswer) {
         setLifes((v) => v - 1)
@@ -187,7 +187,7 @@ export default function Game() {
             ))}
           </View>
 
-          {selectedAnswer ? (
+          {selectedAnswer !== null ? (
             <View
               style={{
                 paddingVertical: 20,
