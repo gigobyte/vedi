@@ -1,4 +1,4 @@
-import { getWrongAnswers, shuffle } from './array'
+import { getRandomElement, getWrongAnswers, shuffle } from './array'
 import { cars } from './resources/cars'
 
 export type Question = {
@@ -8,7 +8,7 @@ export type Question = {
   correctAnswer: number
 }
 
-function* generateQuestion<T extends { image?: string }>(config: {
+function* generateQuestion<T extends { images: string[] }>(config: {
   resources: T[]
   getAnswerLabel: (resource: T) => string
   getTitle: (resource: T) => string
@@ -34,7 +34,7 @@ function* generateQuestion<T extends { image?: string }>(config: {
     ])
 
     const question: Question = {
-      image: resource.image,
+      image: getRandomElement(resource.images),
       title: config.getTitle(resource),
       answers,
       correctAnswer: answers.findIndex((answer) => answer === label)

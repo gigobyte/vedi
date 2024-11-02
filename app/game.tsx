@@ -205,7 +205,7 @@ export default function Game() {
           </View>
           {question.image ? (
             <Image
-              style={{ width: imageWidth, height: 200, borderRadius: 4 }}
+              style={{ width: imageWidth, height: 220, borderRadius: 4 }}
               source={{ uri: question.image }}
             />
           ) : null}
@@ -216,7 +216,7 @@ export default function Game() {
               fontWeight: 900,
               fontFamily: 'Nunito_700Bold',
               color: 'white',
-              paddingTop: 10,
+              paddingTop: 15,
               paddingBottom: 40
             }}
           >
