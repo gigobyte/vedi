@@ -176,7 +176,7 @@ export default function Game() {
       }
 
       setAnswerText('')
-    })
+    }, 10)
   }
 
   const [isKeyboardVisible, setKeyboardVisible] = useState(false)
