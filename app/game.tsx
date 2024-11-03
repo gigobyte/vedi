@@ -1,22 +1,23 @@
 import { Link, router } from 'expo-router'
 import {
-  StatusBar,
   View,
   Text,
   Image,
   useWindowDimensions,
-  Pressable
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+  LayoutChangeEvent
 } from 'react-native'
 import Animated, {
   Easing,
   SlideInDown,
-  SlideInUp,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
-  withTiming
+  withSpring
 } from 'react-native-reanimated'
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { getRandomElement } from '../utils/array'
 import { useEffect, useMemo, useState } from 'react'
@@ -57,6 +58,12 @@ function ProgressBar(props: { progress: number }) {
   const [width, setWidth] = useState(0)
   const progressWidth = useSharedValue(0)
 
+  const onLayout = (e: LayoutChangeEvent) => {
+    if (!width) {
+      setWidth(e.nativeEvent.layout.width)
+    }
+  }
+
   useEffect(() => {
     progressWidth.value = withSpring(
       width * (props.progress / MaxNumberOfQuestions),
@@ -72,7 +79,7 @@ function ProgressBar(props: { progress: number }) {
 
   return (
     <View
-      onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
+      onLayout={onLayout}
       style={{
         height: 16,
         borderRadius: 8,
@@ -105,10 +112,16 @@ function ProgressBar(props: { progress: number }) {
   )
 }
 
+const inputModes = ['tags', 'input'] as const
+
 export default function Game() {
   const insets = useSafeAreaInsets()
   const dimensions = useWindowDimensions()
   const [lifes, setLifes] = useState(5)
+  // const [inputMode, setInputMode] = useState(() => getRandomElement(inputModes))
+  const [inputMode, setInputMode] = useState('input')
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
+  const [answerText, setAnswerText] = useState('')
   const [questionIndex, setQuestionIndex] = useState(0)
   const qs = useMemo(
     () =>
@@ -118,8 +131,6 @@ export default function Game() {
     []
   )
   const question = qs[questionIndex]
-
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
 
   const imageWidth = dimensions.width - 40
 
@@ -140,7 +151,56 @@ export default function Game() {
 
     setSelectedAnswer(null)
     setQuestionIndex((v) => v + 1)
+    setInputMode(getRandomElement(inputModes))
   }
+
+  const onCheckPress = () => {
+    if (!answerText) {
+      return
+    }
+
+    Keyboard.dismiss()
+
+    setTimeout(() => {
+      if (
+        answerText.toLowerCase().replace(/ /g, '') ===
+        question.answers[question.correctAnswer].toLowerCase().replace(/ /g, '')
+      ) {
+        setSelectedAnswer(question.correctAnswer)
+      } else {
+        const randomWrongAnswer = question.answers.indexOf(
+          getRandomElement(
+            question.answers.filter((_, i) => i !== question.correctAnswer)
+          )
+        )
+        setSelectedAnswer(randomWrongAnswer)
+      }
+
+      setAnswerText('')
+    })
+  }
+
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true)
+      }
+    )
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false)
+      }
+    )
+
+    return () => {
+      keyboardDidHideListener.remove()
+      keyboardDidShowListener.remove()
+    }
+  }, [])
 
   const isCorrectAnswer = selectedAnswer === question.correctAnswer
 
@@ -160,7 +220,8 @@ export default function Game() {
           gap: 20,
           paddingTop: 20,
           paddingHorizontal: 20,
-          paddingBottom: 50
+          paddingBottom: 35,
+          display: isKeyboardVisible ? 'none' : 'flex'
         }}
       >
         <Link href="../">
@@ -186,7 +247,12 @@ export default function Game() {
       </View>
       {question.image ? (
         <Image
-          style={{ width: imageWidth, height: 220, borderRadius: 4 }}
+          style={{
+            marginTop: 10,
+            width: imageWidth,
+            height: 220,
+            borderRadius: 4
+          }}
           source={{ uri: question.image }}
         />
       ) : null}
@@ -203,32 +269,92 @@ export default function Game() {
       >
         {question.title}
       </Text>
-      <View
-        style={{
-          flex: 1,
-          paddingHorizontal: 40,
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: 10
-        }}
-      >
-        {question.answers.map((answer, i) => (
-          <Answer
-            key={answer}
-            value={answer}
-            index={i}
-            onPress={onAnswerPress}
-            variant={
-              selectedAnswer === i
-                ? i === question.correctAnswer
-                  ? 'success'
-                  : 'error'
-                : 'default'
-            }
-          />
-        ))}
-      </View>
+
+      {inputMode === 'tags' ? (
+        <View
+          style={{
+            flex: 1,
+            paddingHorizontal: 40,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: 10
+          }}
+        >
+          {question.answers.map((answer, i) => (
+            <Answer
+              key={answer}
+              value={answer}
+              index={i}
+              onPress={onAnswerPress}
+              variant={
+                selectedAnswer === i
+                  ? i === question.correctAnswer
+                    ? 'success'
+                    : 'error'
+                  : 'default'
+              }
+            />
+          ))}
+        </View>
+      ) : null}
+
+      {inputMode === 'input' ? (
+        <KeyboardAvoidingView
+          style={{
+            flex: 1,
+            alignSelf: 'stretch',
+            paddingHorizontal: 20,
+            marginBottom: 20
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              marginBottom: 20,
+              paddingHorizontal: 10,
+              paddingVertical: 5,
+              backgroundColor: '#202f36',
+              borderWidth: 2,
+              borderColor: '#37464f',
+              borderRadius: 10,
+              minHeight: 100
+            }}
+          >
+            <TextInput
+              key={JSON.stringify(question)}
+              style={{
+                color: 'white',
+                fontFamily: 'Nunito_700Bold',
+                fontSize: 18
+              }}
+              placeholder="Type here"
+              placeholderTextColor="#52656d"
+              keyboardType="ascii-capable"
+              onChangeText={(value) => setAnswerText(value)}
+            />
+          </View>
+          {selectedAnswer === null ? (
+            <Button
+              variant={answerText ? 'success' : 'default'}
+              filled
+              text="Check"
+              style={{
+                padding: 12,
+                alignItems: 'center'
+              }}
+              borderWidth={4}
+              textStyle={{
+                fontSize: 16,
+                textTransform: 'uppercase',
+                fontWeight: 900,
+                fontFamily: 'Nunito_700Bold'
+              }}
+              onPress={onCheckPress}
+            />
+          ) : null}
+        </KeyboardAvoidingView>
+      ) : null}
 
       {selectedAnswer !== null ? (
         <Animated.View

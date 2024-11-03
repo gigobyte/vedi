@@ -30,6 +30,6 @@ export function getWrongAnswers<T>(
   return result
 }
 
-export function getRandomElement<T>(array: T[]) {
+export function getRandomElement<T>(array: readonly T[]) {
   return array[Math.floor(Math.random() * array.length)]
 }
